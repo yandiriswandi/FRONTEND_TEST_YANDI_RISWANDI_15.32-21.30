@@ -10,14 +10,11 @@ import axios from 'axios';
 
 function FormComponent() {
   const [provinsi, setProvinsi] = useState([]);
+  const [provinsiId, setProvinsiId] = useState('');
   const [kota, setKota] = useState([]);
   const [kecamatan, setKecamatan] = useState([]);
 
-  useEffect(() => {
-    fetchDataProvinsi();
-    fetchDataKota();
-    fetchDataKecamatan();
-  }, []);
+ console.log(provinsiId);
 
 const styles = {
   form: {
@@ -41,19 +38,7 @@ function fetchDataProvinsi() {
     });
 }
 
-function fetchDataKota() {
-  axios
-    .get(
-      'http://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=%7Bid_provinsi%7D'
-    )
-    .then((res) => {
-      setKota(res.data);
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
-}
+
 
 function fetchDataKecamatan() {
   axios
@@ -62,12 +47,43 @@ function fetchDataKecamatan() {
     )
     .then((res) => {
       setKecamatan(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     })
     .catch((err) => {
       console.log('error', err);
     });
 }
+
+function fetchDataKota(provinsiId) {
+  axios
+  .get(
+    `https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${provinsiId}`
+    // 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+ provinsiId
+    )
+    .then((res) => {
+      setKota(res.data);
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log('error', err);
+    });
+  }
+  useEffect(() => {
+    fetchDataProvinsi();
+  }, [provinsiId]);
+  useEffect(() => {
+    fetchDataKota();
+  }, [provinsiId]);
+  useEffect(() => {
+    fetchDataKecamatan();
+  }, []);
+  
+  const handleProvinsi=(event)=>{
+   
+    const getprovinsiId = event.target.value;
+ 
+  setProvinsiId(getprovinsiId); 
+} 
   return (
     <div>
       <form style={styles.form}>
@@ -76,9 +92,10 @@ function fetchDataKecamatan() {
             Provinsi 
           </label>
           {/* <Select options={provinsi} /> */}
-          <select id="gender" className="form-select" defaultValue="Choose...">
+          <select id="provinsi" name="provinsi" className="form-select" onChange={(e)=>handleProvinsi(e)}>
+          <option>Select Provinsi</option>
           {provinsi?.map((item,index) => (
-            <option>{item.nama}</option>
+            <option key={item.id} value={item.id}>{item.nama}</option>
             ))}
           </select>
         </div>
@@ -88,9 +105,9 @@ function fetchDataKecamatan() {
             Kota
           </label>
           <select id="gender" className="form-select" defaultValue="Choose...">
-          {provinsi?.map((item,index) => (
-            <option>{item.kota_kabupaten}</option>
-            ))}
+          {/* {kota?.map((item,index) => (
+            <option>{item.nama}</option>
+            ))} */}
           </select>
         </div>
 
