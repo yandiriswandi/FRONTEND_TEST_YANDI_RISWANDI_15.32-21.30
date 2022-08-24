@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* navbar */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif !important;
+}
 input{
   margin-left: 50px !important;
   border-width: 2px;
@@ -6,10 +12,10 @@ input{
   margin-top: 10px;
 }
 .input-name{
-  margin-left: 80px !important;
+  margin-left: 81px !important;
 }
 .input-age{
-  margin-left: 93px !important;
+  margin-left: 99px !important;
 }
 .input-select{
   margin-left: 50px !important;
@@ -26,4 +32,10 @@ input{
   margin-left: 30px;
   border-width: 2px;
   padding:1px
+}
+.text-kalkulator{
+  text-align: center;
+}
+.input-login{
+  margin-left: 0px !important;
 }
