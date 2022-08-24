@@ -18,9 +18,9 @@ export default function Login() {
 let navigate = useNavigate();
 
 
-const [state, dispatch] = useContext(UserContext);
+// const [state, dispatch] = useContext(UserContext);
 
-const [message, setMessage] = useState(null);
+// const [message, setMessage] = useState(null);
 
 // Create variabel for store data with useState here ...
 const [form, setForm] = useState({
@@ -38,53 +38,60 @@ const handleChange = (e) => {
 console.log(form);
 };
 
-// Create function for handle insert data process with useMutation here ...
-const handleSubmit = useMutation(async (e) => {
-  try {
-    e.preventDefault();
+// // Create function for handle insert data process with useMutation here ...
+// const handleSubmit = useMutation(async (e) => {
+//   try {
+//     e.preventDefault();
 
-    // Configuration Content-type
-    const config = {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    };
+//     // Configuration Content-type
+//     // const config = {
+//     //   headers: {
+//     //     'Content-type': 'application/json',
+//     //   },
+//     // };
 
-    // Data body
-    const body = JSON.stringify(form);
+//     // Data body
+//     const body = JSON.stringify(form);
 
-    // Insert data user to database
-    const response =  await API.post('/auth/login', body, config);
-    console.log(response.data.data);
-    // Handling response here
-    if (response?.status == 200) {
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: response.data.data
-      })
+//     // Insert data user to database
+//     const response =  axios.post('http://reqruitement-test.teknologikartu.com/v1/auth/login', body);
+//     console.log(response.data.data);
+//     // Handling response here
+   
+//     // Checking process
+//       if (response.status == "success") {
+//         // Send data to useContext
+//         dispatch({
+//           type: "LOGIN_SUCCESS",
+//           payload: response.data,
+//         });
+//     // Get user data
+   
+//       navigate("/home")
+//       const alert = (
+//         <Alert variant="success" className="py-1">
+//           Login Success
+//         </Alert>
+//       );
+//       setMessage(alert);
+//     }
+//   } catch (error) {
+//     const alert = (
+//       <Alert variant="danger" className="py-1">
+//         Failed
+//       </Alert>
+//     );
+//     setMessage(alert);
+//     console.log(error);
+//   }
+// });
 
-      navigate("/home")
-      const alert = (
-        <Alert variant="success" className="py-1">
-          Login Success
-        </Alert>
-      );
-      setMessage(alert);
-    }
-  } catch (error) {
-    const alert = (
-      <Alert variant="danger" className="py-1">
-        Failed
-      </Alert>
-    );
-    setMessage(alert);
-    console.log(error);
-  }
-});
+
   return (
     <Container style={{ width: '30rem' ,marginTop:'70px'}}>
-        {message && message}
-        <Form onSubmit={(e) => handleSubmit.mutate(e)}>
+        {/* {message && message} */}
+        {/* <Form onSubmit={(e) => handleSubmit.mutate(e)}> */}
+        <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Nickname</Form.Label>
             <Form.Control
